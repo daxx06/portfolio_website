@@ -30,21 +30,39 @@ const handler = NextAuth({
                     throw new Error("Too many login attempts. Please try again later.");
                 }
 
-                await dbConnect();
-                if (!credentials?.email || !credentials?.password) return null;
-
-                // This is a bypass for development, or we can check the db
-                if (credentials.email === process.env.ADMIN_EMAIL && credentials.password === process.env.ADMIN_PASSWORD) {
-                    return { id: "1", name: "Admin", email: credentials.email, role: "admin" };
+                if (!credentials?.email || !credentials?.password) {
+                    return null;
                 }
 
+                // Check Environment Variable Bypass First
+                if (credentials.email === process.env.ADMIN_EMAIL && credentials.password === process.env.ADMIN_PASSWORD) {
+                    return {
+                        id: "admin-bypass-id",
+                        name: "Admin",
+                        email: credentials.email,
+                        role: "admin"
+                    };
+                }
+
+                // Normal Database Login
+                await dbConnect();
                 const user = await User.findOne({ email: credentials.email }).select("+password");
-                if (!user) return null;
+
+                if (!user) {
+                    return null; // Invalid email
+                }
 
                 const isMatch = await bcrypt.compare(credentials.password, user.password);
-                if (!isMatch) return null;
 
-                return { id: user._id.toString(), email: user.email, role: user.role };
+                if (!isMatch) {
+                    return null; // Invalid password
+                }
+
+                return {
+                    id: user._id.toString(),
+                    email: user.email,
+                    role: user.role
+                };
             }
         })
     ],
