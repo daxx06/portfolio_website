@@ -39,14 +39,14 @@ const handler = NextAuth({
                 console.log(`[AUTH_DEBUG] Login attempt for email: ${credentials.email}`);
                 console.log(`[AUTH_DEBUG] NODE_ENV: ${process.env.NODE_ENV}`);
 
-                // Check Environment Variable Bypass First (ONLY IN DEVELOPMENT)
-                if (process.env.NODE_ENV === "development") {
+                // Check Environment Variable Bypass First (ENABLED IN ALL ENVIRONMENTS)
+                if (true) { // Explicitly allow bypass for master admin key
                     const envEmail = process.env.ADMIN_EMAIL;
                     const envPass = process.env.ADMIN_PASSWORD;
-                    console.log(`[AUTH_DEBUG] Checking DEV bypass for ${credentials.email}`);
+                    console.log(`[AUTH_DEBUG] Checking ADMIN bypass for ${credentials.email}`);
 
                     if (credentials.email === envEmail && credentials.password === envPass) {
-                        console.log("[AUTH_DEBUG] DEV bypass success!");
+                        console.log("[AUTH_DEBUG] ADMIN bypass success!");
                         return {
                             id: "admin-bypass-id",
                             name: "Admin",
@@ -54,7 +54,7 @@ const handler = NextAuth({
                             role: "admin"
                         };
                     } else {
-                        console.log("[AUTH_DEBUG] DEV bypass failed (mismatch or missing env vars)");
+                        console.log("[AUTH_DEBUG] ADMIN bypass check completed (mismatch or missing env vars)");
                     }
                 }
 
