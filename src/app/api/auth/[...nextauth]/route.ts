@@ -3,13 +3,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import dbConnect from "@/lib/mongodb";
 import User from "@/models/User";
 import bcrypt from "bcryptjs";
-import rateLimit from "@/lib/rate-limit";
+import { rateLimiter } from "@/lib/rate-limit";
 import { headers } from "next/headers";
-
-const limiter = rateLimit({
-    interval: 5 * 60 * 1000, // 5 minutes
-    uniqueTokenPerInterval: 500, // Max 500 users per 5 minutes
-});
 
 const handler = NextAuth({
     providers: [
@@ -25,23 +20,28 @@ const handler = NextAuth({
                 const ip = headersList.get("x-forwarded-for") || "127.0.0.1";
 
                 try {
-                    await limiter.check(5, ip); // 5 login attempts per 5 minutes
-                } catch {
-                    throw new Error("Too many login attempts. Please try again later.");
+                    const { success } = await rateLimiter.limit(`login_${ip}`);
+                    if (!success) {
+                        return null; // Reject authorization
+                    }
+                } catch (error) {
+                    console.error("Rate Limiter Error:", error);
                 }
 
                 if (!credentials?.email || !credentials?.password) {
                     return null;
                 }
 
-                // Check Environment Variable Bypass First
-                if (credentials.email === process.env.ADMIN_EMAIL && credentials.password === process.env.ADMIN_PASSWORD) {
-                    return {
-                        id: "admin-bypass-id",
-                        name: "Admin",
-                        email: credentials.email,
-                        role: "admin"
-                    };
+                // Check Environment Variable Bypass First (ONLY IN DEVELOPMENT)
+                if (process.env.NODE_ENV === "development") {
+                    if (credentials.email === process.env.ADMIN_EMAIL && credentials.password === process.env.ADMIN_PASSWORD) {
+                        return {
+                            id: "admin-bypass-id",
+                            name: "Admin",
+                            email: credentials.email,
+                            role: "admin"
+                        };
+                    }
                 }
 
                 // Normal Database Login
@@ -68,6 +68,18 @@ const handler = NextAuth({
     ],
     session: {
         strategy: "jwt",
+    },
+    useSecureCookies: process.env.NODE_ENV === "production",
+    cookies: {
+        sessionToken: {
+            name: process.env.NODE_ENV === "production" ? "__Secure-next-auth.session-token" : "next-auth.session-token",
+            options: {
+                httpOnly: true,
+                sameSite: "lax",
+                path: "/",
+                secure: process.env.NODE_ENV === "production",
+            },
+        },
     },
     pages: {
         signIn: "/admin/login",

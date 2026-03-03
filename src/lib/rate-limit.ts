@@ -1,35 +1,15 @@
-import { LRUCache } from 'lru-cache';
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 
-type Options = {
-    uniqueTokenPerInterval?: number;
-    interval?: number;
-};
+// Create a new ratelimiter, that allows 10 requests per 1 minute
+const redis = new Redis({
+    url: process.env.UPSTASH_REDIS_REST_URL!,
+    token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+});
 
-export default function rateLimit(options?: Options) {
-    const tokenCache = new LRUCache({
-        max: options?.uniqueTokenPerInterval || 500,
-        ttl: options?.interval || 60000,
-    });
-
-    return {
-        check: (limit: number, token: string) =>
-            new Promise<void>((resolve, reject) => {
-                const tokenCount = (tokenCache.get(token) as number[]) || [0];
-                if (tokenCount[0] === 0) {
-                    tokenCache.set(token, [1]);
-                } else {
-                    tokenCount[0] += 1;
-                    tokenCache.set(token, tokenCount);
-                }
-
-                const currentUsage = tokenCount[0];
-                const isRateLimited = currentUsage >= limit;
-
-                if (isRateLimited) {
-                    reject(new Error("Rate limit exceeded"));
-                } else {
-                    resolve();
-                }
-            }),
-    };
-}
+export const rateLimiter = new Ratelimit({
+    redis: redis,
+    limiter: Ratelimit.slidingWindow(10, "1 m"),
+    analytics: true,
+    prefix: "@upstash/ratelimit",
+});

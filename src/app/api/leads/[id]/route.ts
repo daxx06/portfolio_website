@@ -18,6 +18,7 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
         }
         return NextResponse.json({ success: true, data: {} });
     } catch (error: any) {
-        return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+        console.error("DELETE /api/leads/[id] Error:", error);
+        return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
     }
 }

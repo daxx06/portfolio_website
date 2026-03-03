@@ -3,21 +3,20 @@ import dbConnect from "@/lib/mongodb";
 import Lead from "@/models/Lead";
 import { getServerSession } from "next-auth/next";
 import { leadSchema } from "@/lib/validations/lead";
-import rateLimit from "@/lib/rate-limit";
-
-const limiter = rateLimit({
-    interval: 60000, // 60 seconds
-    uniqueTokenPerInterval: 500, // Max 500 users per second
-});
+import { rateLimiter } from "@/lib/rate-limit";
 
 export async function POST(req: Request) {
     try {
         // Apply IP Rate Limiting
         const ip = req.headers.get("x-forwarded-for") || "127.0.0.1";
         try {
-            await limiter.check(5, ip); // 5 requests per minute per IP
-        } catch {
-            return NextResponse.json({ success: false, error: "Too many requests. Please try again later." }, { status: 429 });
+            const { success } = await rateLimiter.limit(`leads_${ip}`);
+            if (!success) {
+                return NextResponse.json({ success: false, error: "Too many requests. Please try again later." }, { status: 429 });
+            }
+        } catch (error) {
+            console.error("Rate Limiter Error:", error);
+            // Fail open if the rate limiter itself errors out, to not block legitimate leads during Redis downtime
         }
 
         await dbConnect();
@@ -37,7 +36,8 @@ export async function POST(req: Request) {
         const lead = await Lead.create(result.data); // result.data contains the successfully parsed and sanitary data
         return NextResponse.json({ success: true, lead }, { status: 201 });
     } catch (error: any) {
-        return NextResponse.json({ success: false, error: error.message }, { status: 500 }); // Changed from 400 to 500 for generic server errors
+        console.error("POST /api/leads Error:", error);
+        return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
     }
 }
 
@@ -53,6 +53,7 @@ export async function GET() {
         const leads = await Lead.find({}).sort({ createdAt: -1 });
         return NextResponse.json({ success: true, leads });
     } catch (error: any) {
-        return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+        console.error("GET /api/leads Error:", error);
+        return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
     }
 }
