@@ -38,74 +38,98 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+        <div className="min-h-screen flex items-center justify-center bg-[#050505] relative overflow-hidden px-4">
+            {/* Background Effects */}
+            <div className="absolute inset-0 bg-cyber-grid opacity-20 pointer-events-none"></div>
+            <div className="absolute inset-0 pointer-events-none crt-overlay"></div>
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-[#00FFAA] animate-scanline opacity-30"></div>
+
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl border border-gray-100"
+                className="max-w-md w-full relative z-10"
             >
-                <div>
-                    <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900">
-                        Admin Portal
-                    </h2>
-                    <p className="mt-2 text-center text-sm text-gray-600">
-                        Sign in to manage your leads and contacts
-                    </p>
-                </div>
-
-                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-                    {error && (
-                        <div className="bg-red-50 text-red-600 p-3 text-sm rounded-lg text-center">
-                            {error}
-                        </div>
-                    )}
-
-                    <div className="space-y-4">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                            <div className="relative">
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <Mail className="h-5 w-5 text-gray-400" />
-                                </div>
-                                <input
-                                    type="email"
-                                    required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="pl-10 w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
-                                    placeholder="admin@example.com"
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                            <div className="relative">
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <Lock className="h-5 w-5 text-gray-400" />
-                                </div>
-                                <input
-                                    type="password"
-                                    required
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="pl-10 w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
-                                    placeholder="••••••••"
-                                />
-                            </div>
+                <div className="bg-[#0A0A0A] border border-[#1F1F1F] p-1 shadow-[0_0_50px_rgba(0,255,170,0.05)]">
+                    {/* Header bar */}
+                    <div className="w-full h-8 bg-[#1F1F1F] flex items-center px-4 justify-between mb-8">
+                        <div className="font-mono text-[10px] text-[#888888]">C:\SYS\AUTH\PORTAL.EXE</div>
+                        <div className="flex gap-2">
+                            <div className="w-2 h-2 rounded-full bg-red-500/30"></div>
+                            <div className="w-2 h-2 rounded-full bg-[#00FFAA]/30"></div>
                         </div>
                     </div>
 
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full py-3 px-4 flex justify-center items-center gap-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors disabled:opacity-70"
-                    >
-                        {loading ? "Signing in..." : (
-                            <>Sign in <ArrowRight size={18} /></>
-                        )}
-                    </button>
-                </form>
+                    <div className="px-8 pb-10 pt-2 space-y-8">
+                        <div>
+                            <h2 className="text-4xl font-sans font-bold text-[#E0E0E0] uppercase tracking-tighter leading-none text-glitch" data-text="ADMIN_PORTAL">
+                                ADMIN <br /> <span className="text-[#00FFAA]">PORTAL.</span>
+                            </h2>
+                            <p className="mt-4 font-mono text-[10px] text-[#888888] uppercase tracking-widest border-l border-[#333333] pl-2">
+                                INITIALIZE SECURE SESSION ACCESS
+                            </p>
+                        </div>
+
+                        <form className="space-y-6" onSubmit={handleSubmit}>
+                            {error && (
+                                <div className="bg-[#FF0055]/10 border border-[#FF0055] text-[#FF0055] p-3 text-[10px] font-mono font-bold uppercase tracking-widest animate-pulse">
+                                    ERROR: {error}
+                                </div>
+                            )}
+
+                            <div className="space-y-4 font-mono">
+                                <div className="group">
+                                    <label className="block text-[10px] text-[#00FFAA] uppercase tracking-widest mb-2">&gt; IDENTIFICATOR</label>
+                                    <div className="relative">
+                                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                            <Mail className="h-4 w-4 text-[#888888]" />
+                                        </div>
+                                        <input
+                                            type="email"
+                                            required
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            className="w-full bg-[#050505] border border-[#1F1F1F] group-hover:border-[#00FFAA]/50 focus:border-[#00FFAA] pl-12 pr-4 py-4 text-[#E0E0E0] text-xs focus:outline-none transition-colors placeholder:text-[#333333]"
+                                            placeholder="USER@NETWORK"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="group">
+                                    <label className="block text-[10px] text-[#00FFAA] uppercase tracking-widest mb-2">&gt; ACCESS_KEY</label>
+                                    <div className="relative">
+                                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                            <Lock className="h-4 w-4 text-[#888888]" />
+                                        </div>
+                                        <input
+                                            type="password"
+                                            required
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            className="w-full bg-[#050505] border border-[#1F1F1F] group-hover:border-[#00FFAA]/50 focus:border-[#00FFAA] pl-12 pr-4 py-4 text-[#E0E0E0] text-xs focus:outline-none transition-colors placeholder:text-[#333333]"
+                                            placeholder="••••••••"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="group w-full py-5 bg-[#00FFAA]/10 border border-[#00FFAA] text-[#00FFAA] tracking-widest uppercase text-xs hover:bg-[#00FFAA] hover:text-[#0A0A0A] transition-all flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(0,255,170,0.1)] hover:shadow-[0_0_25px_rgba(0,255,170,0.4)]"
+                            >
+                                {loading ? (
+                                    "[ AUTHORIZING... ]"
+                                ) : (
+                                    <><span>[ INITIATE_LOGIN ]</span> <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" /></>
+                                )}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div className="mt-8 text-center font-mono text-[10px] text-[#333333] uppercase tracking-widest">
+                    SECURED BY CRYPTO-SHIELD v2.4.0
+                </div>
             </motion.div>
         </div>
     );
