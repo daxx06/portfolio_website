@@ -112,7 +112,7 @@ export default function Header() {
                                 </div>
                                 <div className="flex flex-col">
                                     <span className={`font-sans font-bold text-xl tracking-widest ${isOpen ? 'text-[#00FFAA]' : 'text-[#E0E0E0]'}`}>
-                                        WEBCRAFTERS
+                                        WEBX SOLUTION
                                     </span>
                                     <span className="font-mono text-[10px] text-[#888888] tracking-widest">
                     // SYS.NET_ACTIVE
@@ -125,8 +125,8 @@ export default function Header() {
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
                                 className={`flex items-center gap-3 px-4 py-2 border transition-all duration-300 font-mono text-xs tracking-widest ${isOpen
-                                        ? 'border-[#FF0055] text-[#FF0055] bg-[#FF0055]/10 hover:bg-[#FF0055]/20'
-                                        : 'border-[#00FFAA] text-[#00FFAA] bg-[#00FFAA]/10 hover:bg-[#00FFAA]/20 shadow-[0_0_10px_rgba(0,255,170,0.2)]'
+                                    ? 'border-[#FF0055] text-[#FF0055] bg-[#FF0055]/10 hover:bg-[#FF0055]/20'
+                                    : 'border-[#00FFAA] text-[#00FFAA] bg-[#00FFAA]/10 hover:bg-[#00FFAA]/20 shadow-[0_0_10px_rgba(0,255,170,0.2)]'
                                     }`}
                             >
                                 <div className="hidden sm:block">[{isOpen ? "TERMINATE" : "ACCESS"}]</div>

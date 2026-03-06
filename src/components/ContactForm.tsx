@@ -84,8 +84,8 @@ export default function ContactForm() {
                                     <div className="font-mono text-[#00FFAA] text-[10px] uppercase tracking-widest flex items-center gap-2">
                                         &gt; PING_ADDRESS
                                     </div>
-                                    <a href="mailto:hello@webcrafters.agency" className="text-2xl font-sans font-bold text-[#E0E0E0] hover:text-[#00FFAA] transition-colors inline-block w-max">
-                                        hello@webcrafters.agency
+                                    <a href="mailto:webxsolution@gmail.com" className="text-2xl font-sans font-bold text-[#E0E0E0] hover:text-[#00FFAA] transition-colors inline-block w-max">
+                                        webxsolution@gmail.com
                                     </a>
                                 </div>
                                 <div className="flex flex-col gap-2">
@@ -93,8 +93,8 @@ export default function ContactForm() {
                                         &gt; GEO_COORDINATES <MapPin size={12} />
                                     </div>
                                     <address className="text-lg font-sans font-bold text-[#888888] not-italic leading-relaxed">
-                                        142 CYBERNETIC AVE<br />
-                                        DISTRICT 09, NY 10012
+                                        Ghanta Ghar<br />
+                                        Dehradun, UK
                                     </address>
                                 </div>
                             </div>

@@ -22,7 +22,7 @@ export default function Footer() {
                                     <div className="w-2 h-2 bg-[#00FFAA] animate-pulse"></div>
                                 </div>
                                 <div>
-                                    <span className="text-[#E0E0E0] group-hover:text-[#00FFAA] transition-colors">WEBCRAFTERS</span>
+                                    <span className="text-[#E0E0E0] group-hover:text-[#00FFAA] transition-colors">WEBX SOLUTION</span>
                                     <span className="block font-mono text-[10px] text-[#888888] tracking-widest mt-1">
                                         SYSTEM_CORE // ONLINE
                                     </span>
@@ -34,7 +34,7 @@ export default function Footer() {
                         </div>
 
                         <a href="mailto:hello@webcrafters.agency" className="text-xl md:text-2xl font-sans font-bold tracking-tighter text-[#00FFAA] hover:text-[#E0E0E0] hover:drop-shadow-[0_0_10px_#00FFAA] transition-all mt-auto flex items-center gap-3">
-                            <span className="font-mono text-sm">&gt;</span> hello@webcrafters.agency
+                            <span className="font-mono text-sm">&gt;</span> webxsolution@gmail.com
                         </a>
                     </div>
 
@@ -61,7 +61,7 @@ export default function Footer() {
                 </div>
 
                 <div className="pt-8 border-t border-[#1F1F1F] flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-[10px] text-[#888888] tracking-widest uppercase">
-                    <p>COPY_PASTED &copy; {currentYear} WEBCRAFTERS LLC</p>
+                    <p>COPY_PASTED &copy; {currentYear} WEBX SOLUTION LLC</p>
                     <div className="flex gap-8">
                         <Link href="/admin/login" className="hover:text-[#00FFAA] transition-colors">[ ADMIN_TERMINAL ]</Link>
                         <a href="#" className="hover:text-[#00FFAA] transition-colors">SECURITY_POLICY</a>
