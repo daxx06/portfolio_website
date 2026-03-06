@@ -61,7 +61,7 @@ export default function Footer() {
                 </div>
 
                 <div className="pt-8 border-t border-[#1F1F1F] flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-[10px] text-[#888888] tracking-widest uppercase">
-                    <p>COPY_PASTED &copy; {currentYear} WEBX SOLUTION LLC</p>
+                    <p>&copy; {currentYear} WEBX SOLUTION LLC</p>
                     <div className="flex gap-8">
                         <Link href="/admin/login" className="hover:text-[#00FFAA] transition-colors">[ ADMIN_TERMINAL ]</Link>
                         <a href="#" className="hover:text-[#00FFAA] transition-colors">SECURITY_POLICY</a>
