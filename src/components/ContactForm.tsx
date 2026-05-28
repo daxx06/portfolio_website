@@ -84,8 +84,8 @@ export default function ContactForm() {
                                     <div className="font-mono text-[#00FFAA] text-[10px] uppercase tracking-widest flex items-center gap-2">
                                         &gt; PING_ADDRESS
                                     </div>
-                                    <a href="mailto:webxsolution@gmail.com" className="text-2xl font-sans font-bold text-[#E0E0E0] hover:text-[#00FFAA] transition-colors inline-block w-max">
-                                        webxsolution@gmail.com
+                                    <a href="mailto:dakshbhatnagar7@gmail.com" className="text-2xl font-sans font-bold text-[#E0E0E0] hover:text-[#00FFAA] transition-colors inline-block w-max">
+                                        dakshbhatnagar7@gmail.com
                                     </a>
                                 </div>
                                 <div className="flex flex-col gap-2">

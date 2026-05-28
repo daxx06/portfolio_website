@@ -19,8 +19,43 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SYS.INIT // WEBX",
-  description: "Automated high-performance web systems.",
+  title: "WEBX Solution — High-Performance Web Development & Digital Automation",
+  description:
+    "WEBX Solution builds premium, high-converting websites and digital automation systems for businesses. Get a stunning online presence that drives real results.",
+  keywords: [
+    "web development",
+    "website design",
+    "digital automation",
+    "WEBX Solution",
+    "business website",
+    "web agency",
+  ],
+  authors: [{ name: "WEBX Solution" }],
+  creator: "WEBX Solution",
+  publisher: "WEBX Solution",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "WEBX Solution",
+    title: "WEBX Solution — High-Performance Web Development & Digital Automation",
+    description:
+      "We build premium, high-converting websites and digital automation systems for businesses. Get a stunning online presence that drives real results.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WEBX Solution — High-Performance Web Development",
+    description:
+      "Premium websites & digital automation for businesses. Get a stunning online presence that drives real results.",
+  },
+  metadataBase: new URL("https://portfolio-website-roan-five-25.vercel.app"),
 };
 
 export default function RootLayout({

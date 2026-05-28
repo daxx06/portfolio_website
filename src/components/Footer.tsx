@@ -33,8 +33,8 @@ export default function Footer() {
                             </p>
                         </div>
 
-                        <a href="mailto:webxsolution@gmail.com" className="text-xl md:text-2xl font-sans font-bold tracking-tighter text-[#00FFAA] hover:text-[#E0E0E0] hover:drop-shadow-[0_0_10px_#00FFAA] transition-all mt-auto flex items-center gap-3">
-                            <span className="font-mono text-sm">&gt;</span> webxsolution@gmail.com
+                        <a href="mailto:dakshbhatnagar7@gmail.com" className="text-xl md:text-2xl font-sans font-bold tracking-tighter text-[#00FFAA] hover:text-[#E0E0E0] hover:drop-shadow-[0_0_10px_#00FFAA] transition-all mt-auto flex items-center gap-3">
+                            <span className="font-mono text-sm">&gt;</span> dakshbhatnagar7@gmail.com
                         </a>
                     </div>
 
