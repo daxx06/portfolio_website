@@ -48,12 +48,21 @@ export const metadata: Metadata = {
     title: "WEBX Solution — High-Performance Web Development & Digital Automation",
     description:
       "We build premium, high-converting websites and digital automation systems for businesses. Get a stunning online presence that drives real results.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "WEBX Solution — High-Performance Web Development & Digital Automation",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "WEBX Solution — High-Performance Web Development",
     description:
       "Premium websites & digital automation for businesses. Get a stunning online presence that drives real results.",
+    images: ["/og-image.png"],
   },
   metadataBase: new URL("https://portfolio-website-roan-five-25.vercel.app"),
 };
