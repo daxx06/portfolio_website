@@ -19,7 +19,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SYS.INIT // WEBCRAFTERS",
+  title: "SYS.INIT // WEBX",
   description: "Automated high-performance web systems.",
 };
 
